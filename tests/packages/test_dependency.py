@@ -130,3 +130,11 @@ def test_to_pep_508_with_patch_python_version(python_versions, marker):
 
     assert expected == dependency.to_pep_508()
     assert marker == str(dependency.marker)
+
+
+def test_complete_name():
+    assert "foo" == Dependency("foo", ">=1.2.3").complete_name
+    assert (
+        "foo[bar,baz]"
+        == Dependency("foo", ">=1.2.3", extras=["baz", "bar"]).complete_name
+    )
